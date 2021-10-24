@@ -26,7 +26,7 @@ const starts = async (Fg = new WAConnection()) => {
     //console.log(banner.string)
     
     Fg.on('qr', () => {
-        console.log(color('[','white'), color('!','red'), color(']','white'), color(' SCAN QR TO FgECT'))
+        console.log(color('[','white'), color('!','red'), color(']','white'), color(' Escanee el codigo QR para conectarse...'))
     })
 
 const CFonts  = require('cfonts')
@@ -70,7 +70,7 @@ Fg.on('group-participants-update', async (anu) => {
 
 ▢ *Pide las reglas del grupo* para evitar ser baneado
 
-/*▢ *📌 Descripción :* \n${mdata.desc}*/
+▢ *📌 Descripción :* \n${mdata.desc}
 `
 				
 				let buff = await getBuffer(ppimg)
@@ -133,7 +133,7 @@ Fg.on('group-participants-update', async (anu) => {
  * @param {function} cb <optional> 
  */
 function nocache(module, cb = () => { }) {
-    console.log('Module', `'${module}'`, 'Se está revisando!')
+    console.log('Module', `'${module}'`, 'Abriendo!')
     fs.watchFile(require.resolve(module), async () => {
         await uncache(require.resolve(module))
         cb(module)

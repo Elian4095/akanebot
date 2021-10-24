@@ -746,7 +746,7 @@ if (!isVerify) return reply(userB(prefix))
 break
    
 //--- verificación 
-case 'verify':
+/*case 'verify':
 case 'reg':
 case 'verificar':
 case 'register':
@@ -770,9 +770,9 @@ Verificación completa usa *${prefix}Help* para ver el Menu`
 
 rgimg = await getBuffer(ppimg)
 Fg.sendMessage(from, rgimg, image, {quoted: mek, caption: capt})
-break
+break*/
 
-/*case 'verify':
+case 'verify':
 			if (isVerify) return reply('*✳️ Tu cuenta ya esta registrada*')
 					_user.push(sender)
 fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
@@ -785,7 +785,7 @@ fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
 
 Verificación completa usa *${prefix}Help* para ver el Menu`
 reply(capt)
-break*/
+break
 
 //-- Simsimi
 case 'simi':
@@ -923,10 +923,17 @@ if (!isOwner) return reply(ownerB())
 reply(`✳️ Espere un momento el bot se está actualizando`)
 exec(`bash update.sh`, (err, stdout) => {
 if (err) return reply(err)
-if (stdout) reply(`✅ *El bot se ah actualizado de forma satisfactoria*\n Informe de la actualización:\n\n${stdout}\n\n Los cambios serán reflejados la próxima vez que inicie el bot.`)
+if (stdout) reply(`✅ *El bot se ah actualizado de forma satisfactoria*\n\n📌 Use el comando *${prefix}reiniciar* para aplicar los cambios\n\nInforme de la actualización:\n\n${stdout}`)
 })
 break
 
+case 'restart':
+  case 'reiniciar':
+             if (!isOwner) return reply(ownerB()) 
+           //  reply(`✳️ Espere un momento el bot se está reiniciando`)
+             exec(`node main`)
+             reply('✅ El bot se reinicio')
+break
 
 case 'nulis':
 	case 'tulis':
@@ -1800,7 +1807,7 @@ _📤 El video se está enviando, si no llega descargue por el link_`
 				}
 				break
 		
- case 'play':
+ /*case 'play':
 			if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
     if (args.length < 1) return reply(`✳️ *Ingresa el título de una canción*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
@@ -1834,7 +1841,29 @@ _📤 Enviando, espere si el audio no aparece, descargue por el link_`
                         })
                         } catch (err) {
                         reply(mess.error.api) }
-                   break
+                   break*/
+                  
+                  case 'play':
+if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+if (args.length < 1) return reply(`✳️ *Ingresa el título de una canción*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
+reply(wait())
+  pl = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?apikey=WRhywqyYC0doYNeqTZymcB2SjrT&q=${q}`)
+  judul = pl.result.title
+  lagu = pl.result.url_audio
+  size = pl.result.size
+  foto = pl.result.thumbnail
+  durasi = pl.result.duration
+  capt = `≡ *PLAY*
+▢ *Título* : ${judul}
+▢ *Peso* : ${size}
+▢ *Duracion* : ${durasi}`
+  if(Number(size.split(' MB')[0]) >= 99.00) return reply(`✳️ El archivo es demasiado grande, la reproducción de música se canceló, el tamaño máximo del archivo es de 99 mb`)
+  thumb = await getBuffer(foto)
+  Fg.sendMessage(from, thumb, image, {quoted: mek, caption: capt})
+  mp3 = await getBuffer(lagu)
+  Fg.sendMessage(from, mp3, document, {mimetype: 'audio/mp4', filename: `${judul}.mp3`, quoted: mek})
+  break
    
       case 'video':
 				case 'playvideo':
@@ -2538,6 +2567,7 @@ case 'join':
 case 'entrabot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
+  if (isGroup) return reply(`✳️ Sólo disponible en el privado del bot`)
   if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo\n\n📌 Ejemplo *${prefix + command}* ${soportefg}`); 
         try {
           if (!isUrl(args[0]) && !args[0].includes("whatsapp.com"))
@@ -2556,9 +2586,9 @@ if (!isVerify) return reply(userB(prefix))
        case 'runtime':    
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf()) 
-					runtime = process.uptime()
-					runte = `「 *TIEMPO DE EJECUCION* 」\n\n*${kyun(runtime)}*`
-					reply(`${runte}`)
+					runtim = process.uptime()
+					runte = `「 *TIEMPO DE EJECUCION* 」\n\n*${kyun(runtim)}*`
+					reply(runte)
 					break
 					
       case 'speed':
@@ -2653,9 +2683,9 @@ if (!isVerify) return reply(userB(prefix))
             }
             break	
             
-//-----------------------------ATTP - TTP----------------------------
+//-----------------------------ATTP -----------------------------
 
-						case 'ttp':  
+						/*case 'ttp':  
              if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${prefix + command}* DyLux`)
@@ -2663,7 +2693,7 @@ if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${pre
                     F = q
                     anu1 = await getBuffer(`https://lolhuman.herokuapp.com/api/ttp3?apikey=${lolkey}&text=${F}`)
                     Fg.sendMessage(from, anu1, sticker, {quoted: mek})
-                    break
+                    break*/
                     
 
 	case 'attp':
